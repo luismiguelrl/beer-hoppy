@@ -1,10 +1,10 @@
 {
   "name": "beer-hoppy",
   "version": "1.0.0",
-  "description": "",
+  "description": "Beer is my programming language!",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo 0"
   },
   "keywords": [],
   "author": "Beer Hoppe Harry",
