@@ -12,7 +12,6 @@ export class BeersService {
   ) {}
 
   async create(createBeerDto: CreateBeerDto) {
-    console.log('createBeerDto', createBeerDto);
     try {
       return await this.beerModel.create(createBeerDto);
     } catch (error) {
@@ -21,11 +20,15 @@ export class BeersService {
   }
 
   bulk(body: CreateBeerDto[]) {
-    let bulk = this.beerModel.collection.initializeUnorderedBulkOp();
+    try {
+      let bulk = this.beerModel.collection.initializeUnorderedBulkOp();
 
-    for (const item of body) bulk.insert(item);
+      for (const item of body) bulk.insert(item);
 
-    return bulk.execute();
+      return bulk.execute();
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
   }
 
   async findAll() {

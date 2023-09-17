@@ -22,7 +22,7 @@ export class SeedService {
       data = data.concat(beers_from_page);
     }
 
-    console.log(`\n I like my water with grains and : \r `);
+    console.log(`\n I like my water with grains and: \r `);
     data.forEach((beer, index) => {
       console.log(
         ` ${index + 1} => ${beer.name} | ${beer.tagline} | IBU: ${beer.ibu}`,

@@ -1,13 +1,16 @@
 import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { SeedModule } from './seed/seed.module';
 import { BeersModule } from './beers/beers.module';
-import { MongooseModule } from '@nestjs/mongoose';
+import mongoConfig from './config/mongo.config';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost:27017/punk-beers'),
+    ConfigModule.forRoot({ isGlobal: true }),
+    MongooseModule.forRoot(mongoConfig.mongo_uri),
     SeedModule,
     BeersModule,
   ],

@@ -1,7 +1,10 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
+import { AppModule } from './app.module';
+import appConfig from './config/app.config';
+import * as dotEnv from 'dotenv';
+dotEnv.config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -17,11 +20,16 @@ async function bootstrap() {
 
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true,
+      forbidNonWhitelisted: true,
       transform: true,
+      transformOptions: {
+        enableImplicitConversion: true,
+      },
+      whitelist: true,
     }),
   );
 
-  await app.listen(3000);
+  await app.listen(appConfig.port);
 }
+
 bootstrap();
