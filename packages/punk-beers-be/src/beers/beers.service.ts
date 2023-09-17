@@ -1,19 +1,43 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateBeerDto } from './dto/create-beer.dto';
 import { UpdateBeerDto } from './dto/update-beer.dto';
+import { Model } from 'mongoose';
+import { Beer } from './entities/beer.schema';
+import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class BeersService {
-  create(createBeerDto: CreateBeerDto) {
-    return 'This action adds a new beer';
+  constructor(
+    @InjectModel(Beer.name) private readonly beerModel: Model<Beer>,
+  ) {}
+
+  async create(createBeerDto: CreateBeerDto) {
+    console.log('createBeerDto', createBeerDto);
+    try {
+      return await this.beerModel.create(createBeerDto);
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
   }
 
-  findAll() {
-    return `This action returns all beers`;
+  bulk(body: CreateBeerDto[]) {
+    let bulk = this.beerModel.collection.initializeUnorderedBulkOp();
+
+    for (const item of body) bulk.insert(item);
+
+    return bulk.execute();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} beer`;
+  async findAll() {
+    return this.beerModel.find({});
+  }
+
+  async findOne(query) {
+    try {
+      return await this.beerModel.findOne(query).exec();
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
   }
 
   update(id: number, updateBeerDto: UpdateBeerDto) {
@@ -22,5 +46,9 @@ export class BeersService {
 
   remove(id: number) {
     return `This action removes a #${id} beer`;
+  }
+
+  async removeAll() {
+    return await this.beerModel.deleteMany({});
   }
 }

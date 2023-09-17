@@ -18,6 +18,7 @@ export interface PunkApiBeerResponse {
   ingredients: IngredientsResponse;
   food_pairing: string[];
   brewers_tips: string;
+  contributed_by: string;
 }
 
 export interface ValueUnitResponse {
@@ -32,13 +33,12 @@ export interface MethodResponse {
 }
 
 export interface MashTempResponse {
-  temp: ValueUnitResponse[];
+  temp: ValueUnitResponse;
   duration: number;
 }
 
 export interface FermentationResponse {
-  temp: ValueUnitResponse[];
-  duration: number;
+  temp: ValueUnitResponse;
 }
 
 export interface IngredientsResponse {
