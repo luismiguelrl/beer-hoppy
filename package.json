@@ -3,14 +3,17 @@
   "version": "1.0.0",
   "description": "Beer is my programming language!",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo 0"
+    "ci": " yarn workspaces run ci",
+    "bootstrap": "yarn",
+    "install-be": "cd packages/punk-beers-be && npm install",
+    "install-fe": "cd packages/punk-beers-fe && npm install",
+    "postinstall": "(npm run install-be && npm run install-fe)",
+    "test": "echo 0",
+    "start:containers": "docker-compose up -d"
   },
   "keywords": [],
   "author": "Beer Hoppe Harry",
-  "license": "ISC",
-  "workspaces": [
-    "packages\\punk-beers-be",
-    "packages\\punk-beers-fe"
-  ]
+  "license": "ISC"
 }

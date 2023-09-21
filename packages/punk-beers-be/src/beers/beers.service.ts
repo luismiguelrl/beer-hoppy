@@ -43,6 +43,14 @@ export class BeersService {
     }
   }
 
+  async findRandom() {
+    try {
+      return await this.beerModel.aggregate([{ $sample: { size: 3 } }]).exec();
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
+  }
+
   update(id: number, updateBeerDto: UpdateBeerDto) {
     return `This action updates a #${id} beer`;
   }

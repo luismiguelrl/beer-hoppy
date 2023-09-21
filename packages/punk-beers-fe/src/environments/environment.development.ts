@@ -1,4 +1,4 @@
 export const environment = {
-    production: false,
-    baseUrl: 'https://api.punkapi.com/v2/'
+  production: false,
+  baseUrl: 'http://localhost:3000',
 };
