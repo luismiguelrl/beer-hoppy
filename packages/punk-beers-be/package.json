@@ -1,9 +1,8 @@
 {
-  "name": "punk-beers-be",
+  "name": "@beer-hoppy/punk-beers-be",
   "version": "0.0.1",
   "description": "My soul wants beers",
   "author": "Beer Hoppe Harry",
-  "private": true,
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",

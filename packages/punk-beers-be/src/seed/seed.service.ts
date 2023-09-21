@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { AxiosAdapter } from 'src/common/adapter/axios.adapter';
 import { PunkApiBeerResponse } from './interfaces/punk-api-beer.interface';
 import { BeersService } from 'src/beers/beers.service';
+import appConfig from 'src/config/app.config';
 
 @Injectable()
 export class SeedService {
@@ -11,7 +12,7 @@ export class SeedService {
   ) {}
 
   async executedBeerSeed() {
-    const beerUrl = `https://api.punkapi.com/v2/beers?page=`;
+    const beerUrl = `${appConfig.punkApiUri}beers?page=`;
 
     let data: PunkApiBeerResponse[] = [];
 
@@ -33,7 +34,7 @@ export class SeedService {
       await this.beersService.removeAll();
       this.beersService.bulk(data);
 
-      return `Seed executed: ${data.length} beers...`;
+      return `Seed executed: Take me out for ${data.length} beers!!`;
     }
 
     return `I need a huge, no beers today`;
