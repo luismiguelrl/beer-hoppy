@@ -12,6 +12,11 @@ const AppRoutes: Routes = [
     loadChildren: () =>
       import('./features/home/home.module').then((m) => m.HomeModule),
   },
+  {
+    path: 'beers',
+    loadChildren: () =>
+      import('./features/beers/beers.module').then((m) => m.BeersModule),
+  },
 ];
 
 @NgModule({

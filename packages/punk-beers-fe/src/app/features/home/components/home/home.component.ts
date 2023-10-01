@@ -10,7 +10,7 @@ export class HomeComponent implements OnInit {
   constructor(private beersService: BeersService) {}
 
   ngOnInit(): void {
-    this.beersService.findRandom().subscribe((response) => {
+    this.beersService.findRandom(3).subscribe((response) => {
       console.log(response);
     });
   }

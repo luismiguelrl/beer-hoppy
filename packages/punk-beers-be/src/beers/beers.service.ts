@@ -43,9 +43,11 @@ export class BeersService {
     }
   }
 
-  async findRandom() {
+  async findRandom(quantity: number) {
     try {
-      return await this.beerModel.aggregate([{ $sample: { size: 3 } }]).exec();
+      return await this.beerModel
+        .aggregate([{ $sample: { size: quantity } }])
+        .exec();
     } catch (error) {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);
     }

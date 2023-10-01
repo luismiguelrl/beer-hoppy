@@ -24,9 +24,10 @@ export class BeersController {
   findAll() {
     return this.beersService.findAll();
   }
-  @Get('random')
-  findRandom() {
-    return this.beersService.findRandom();
+
+  @Get('random/:quantity')
+  findRandom(@Param('quantity') quantity: number) {
+    return this.beersService.findRandom(quantity);
   }
 
   @Get(':id')

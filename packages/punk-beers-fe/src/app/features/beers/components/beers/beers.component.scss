@@ -1,0 +1,37 @@
+table {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td,
+th {
+  width: 16.66%;
+}
+
+.mat-mdc-header-cell {
+  color: black;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.mat-mdc-row:nth-child(even) {
+  background-color: #f4f4f4;
+}
+
+.mat-mdc-row:hover {
+  cursor: pointer;
+  box-shadow: inset 0 0 0 5px grey;
+  background-color: #f0f0f0;
+}
+
+.mat-mdc-form-field {
+  margin: 4px 0 4px 0;
+}
+
+::ng-deep.mat-paginator {
+  margin: auto;
+}

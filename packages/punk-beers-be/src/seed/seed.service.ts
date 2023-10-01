@@ -14,17 +14,19 @@ export class SeedService {
   async executedBeerSeed() {
     const beerUrl = `${appConfig.punkApiUri}beers?page=`;
 
-    let data: PunkApiBeerResponse[] = [];
+    let data: any[] = [];
 
     for (let i = 1; i < 6; i++) {
-      const beers_from_page = await this.http.get<PunkApiBeerResponse[]>(
+      const beers_from_page = await this.http.get<any[]>(
         `${beerUrl}${i}&per_page=80`,
       );
+
       data = data.concat(beers_from_page);
     }
 
     console.log(`\n I like my water with grains and: \r `);
     data.forEach((beer, index) => {
+      delete beer.id;
       console.log(
         ` ${index + 1} => ${beer.name} | ${beer.tagline} | IBU: ${beer.ibu}`,
       );

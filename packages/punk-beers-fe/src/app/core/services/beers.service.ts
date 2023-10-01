@@ -15,7 +15,7 @@ export class BeersService {
     return this.httpClient.get<any>(this.apiUrl);
   }
 
-  findRandom(): Observable<any> {
-    return this.httpClient.get<any>(`${this.apiUrl}/random`);
+  findRandom(quantity: number): Observable<any> {
+    return this.httpClient.get<any>(`${this.apiUrl}/random/${quantity}`);
   }
 }
